@@ -97,8 +97,26 @@
   <h2>Output</h2>
   <label for="res">Resolution</label>
   <select id="res">
-    <option value="1920x1080">1920 × 1080 (Full HD)</option>
-    <option value="2560x1440" selected>2560 × 1440 (2K / QHD)</option>
+    <optgroup label="16:9">
+      <option value="1280x720">1280 × 720 (HD)</option>
+      <option value="1920x1080">1920 × 1080 (Full HD)</option>
+      <option value="2560x1440" selected>2560 × 1440 (2K / QHD)</option>
+      <option value="3840x2160">3840 × 2160 (4K UHD)</option>
+      <option value="5120x2880">5120 × 2880 (5K)</option>
+    </optgroup>
+    <optgroup label="16:10">
+      <option value="1920x1200">1920 × 1200 (WUXGA)</option>
+      <option value="2560x1600">2560 × 1600 (WQXGA)</option>
+    </optgroup>
+    <optgroup label="Ultrawide 21:9">
+      <option value="2560x1080">2560 × 1080 (UW-FHD)</option>
+      <option value="3440x1440">3440 × 1440 (UW-QHD)</option>
+    </optgroup>
+    <optgroup label="Phone (portrait)">
+      <option value="1080x1920">1080 × 1920</option>
+      <option value="1170x2532">1170 × 2532</option>
+      <option value="1440x3200">1440 × 3200</option>
+    </optgroup>
   </select>
   <p></p>
   <button class="primary" id="download">Render full resolution &amp; download PNG</button>

@@ -109,7 +109,7 @@ the parameters to its first preset.
 
 | Control | Effect |
 |---|---|
-| **Resolution** | 1920 × 1080 or 2560 × 1440. Also sets the aspect ratio of the preview. |
+| **Resolution** | Output size, from 1280 × 720 up to 4K (3840 × 2160) and 5K (5120 × 2880), plus 16:10, ultrawide and portrait phone formats. Also sets the aspect ratio of the preview. Line width is in output pixels, so at 4K and above you may want to raise it to keep the same look. |
 | **Render full resolution & download PNG** | Renders at the chosen resolution and saves a file named after the system, palette, size and seed. |
 
 ## Code layout
