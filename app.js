@@ -11,6 +11,9 @@ const workerUrl = URL.createObjectURL(new Blob([`
   };
 `], { type: "text/javascript" }));
 
+// Output height at which the line width slider is taken literally when scaling is on.
+const REF_HEIGHT = 1440;
+
 const state = {
   system: "whirlpools",
   params: {},
@@ -88,7 +91,9 @@ $("preset").addEventListener("change", (e) => applyPreset(e.target.value));
 slider($("traj"), "seeds", { label: "Number of trajectories", min: 100, max: 6000, step: 50 }, state);
 slider($("traj"), "arc", { label: "Max length per trajectory", min: 2, max: 120, step: 1 }, state);
 slider($("look"), "kappa0", { label: "Curvature scale (colour saturates around this κ)", min: 0.05, max: 10, step: 0.05 }, state);
-slider($("look"), "width", { label: "Line width (px at full resolution)", min: 0.5, max: 4, step: 0.1 }, state);
+slider($("look"), "width", { label: "Line width (px)", min: 0.5, max: 4, step: 0.1 }, state);
+$("look").insertAdjacentHTML("beforeend",
+  `<label class="check"><input type="checkbox" id="scaleWidth" checked> Scale width with resolution (px at ${REF_HEIGHT} px height)</label>`);
 slider($("look"), "exposure", { label: "Exposure", min: 0.02, max: 2, step: 0.01 }, state);
 
 for (const name of Object.keys(PALETTES)) $("palette").add(new Option(name, name));
@@ -97,7 +102,7 @@ function showSwatch() {
   if ($("reverse").checked) stops.reverse();
   $("swatch").style.background = `linear-gradient(90deg, ${stops.join(",")})`;
 }
-for (const id of ["palette", "reverse", "colorMode", "bg", "both", "seed", "res"]) {
+for (const id of ["palette", "reverse", "colorMode", "bg", "both", "seed", "res", "scaleWidth"]) {
   $(id).addEventListener("input", () => { showSwatch(); schedulePreview(); });
 }
 $("shuffle").addEventListener("click", () => {
@@ -112,12 +117,14 @@ function outputSize() {
 }
 
 function renderOpts(scale, step) {
+  const { H } = outputSize();
+  const width = state.width * ($("scaleWidth").checked ? H / REF_HEIGHT : 1);
   return {
     system: state.system, params: { ...state.params },
     cx: state.cx, cy: state.cy, span: state.span,
     seeds: state.seeds, seed: +$("seed").value || 0, arc: state.arc,
     step, both: $("both").checked,
-    width: Math.max(0.5, state.width * scale),
+    width: Math.max(0.5, width * scale),
     exposure: state.exposure, kappa0: state.kappa0,
     colorMode: $("colorMode").value, palette: $("palette").value,
     reverse: $("reverse").checked, bg: $("bg").value,

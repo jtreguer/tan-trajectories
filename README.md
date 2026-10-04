@@ -101,7 +101,8 @@ the parameters to its first preset.
 | **Reverse palette** | on/off | Flips the ramp end to end. |
 | **Colour driven by** | — | **Curvature magnitude \|κ\|**: straight segments take the start of the palette and tight turns the end. **Signed curvature κ**: left turns and right turns go to opposite ends of the palette, with straight segments in the middle, which shows the rotation direction of each vortex. |
 | **Curvature scale** | 0.05 – 10 | Curvature at which the colour approaches the end of the palette (the mapping is a `tanh` of κ divided by this value). Lower values push more of the image towards the bright end; higher values reserve it for the tightest turns. |
-| **Line width** | 0.5 – 4 | Width of each stroke in pixels at full resolution. It is scaled down in the preview so the preview matches the final look. |
+| **Line width** | 0.5 – 4 | Width of each stroke in pixels. It is scaled down in the preview so the preview matches the final look. |
+| **Scale width with resolution** | on/off | On by default. The width is then given for a 1440 px tall image and scaled with the output height, so a render looks the same at every resolution (at 4K the strokes are 1.5 times wider). Off, the width is used as-is in output pixels, which makes strokes look thinner at larger sizes. |
 | **Exposure** | 0.02 – 2 | How quickly overlapping strokes become opaque. Low values give faint, ghostly lines; high values saturate dense areas. |
 | **Background** | colour | Colour shown wherever no trajectory passes. |
 
@@ -109,7 +110,7 @@ the parameters to its first preset.
 
 | Control | Effect |
 |---|---|
-| **Resolution** | Output size, from 1280 × 720 up to 4K (3840 × 2160) and 5K (5120 × 2880), plus 16:10, ultrawide and portrait phone formats. Also sets the aspect ratio of the preview. Line width is in output pixels, so at 4K and above you may want to raise it to keep the same look. |
+| **Resolution** | Output size, from 1280 × 720 up to 4K (3840 × 2160) and 5K (5120 × 2880), plus 16:10, ultrawide and portrait phone formats. Also sets the aspect ratio of the preview. |
 | **Render full resolution & download PNG** | Renders at the chosen resolution and saves a file named after the system, palette, size and seed. |
 
 ## Code layout
