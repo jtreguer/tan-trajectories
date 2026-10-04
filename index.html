@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tan Trajectories</title>
+<link rel="icon" href="data:,">
+<style>
+  :root {
+    --bg: #0e0f13; --panel: #16181e; --line: #262a33; --text: #e4e6eb;
+    --muted: #8b91a0; --accent: #e0a24e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 13px/1.4 system-ui, sans-serif; display: flex; height: 100vh;
+  }
+  aside {
+    width: 320px; flex: none; overflow-y: auto; background: var(--panel);
+    border-right: 1px solid var(--line); padding: 14px 16px 24px;
+  }
+  main { flex: 1; display: flex; flex-direction: column; min-width: 0; padding: 16px; gap: 10px; }
+  h1 { font-size: 15px; margin: 0 0 12px; letter-spacing: .02em; }
+  h2 {
+    font-size: 11px; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--muted); margin: 18px 0 8px; font-weight: 600;
+  }
+  label { display: block; margin: 8px 0 3px; color: var(--muted); }
+  .row { display: flex; align-items: center; gap: 8px; }
+  .row > * { flex: 1; }
+  select, input[type=number], button {
+    width: 100%; background: #1d2028; color: var(--text); border: 1px solid var(--line);
+    border-radius: 5px; padding: 5px 7px; font: inherit;
+  }
+  input[type=range] { width: 100%; accent-color: var(--accent); }
+  input[type=color] { width: 44px; height: 28px; flex: none; border: 1px solid var(--line); background: none; padding: 0; }
+  .val { flex: none; width: 52px; text-align: right; font-variant-numeric: tabular-nums; color: var(--text); }
+  .check { display: flex; align-items: center; gap: 6px; margin-top: 8px; color: var(--muted); }
+  .check input { margin: 0; }
+  pre.formula {
+    margin: 8px 0 0; padding: 8px; background: #0f1116; border: 1px solid var(--line);
+    border-radius: 5px; font: 12px/1.5 ui-monospace, monospace; white-space: pre-wrap;
+  }
+  .swatch { height: 10px; border-radius: 3px; margin-top: 6px; }
+  button { cursor: pointer; }
+  button.primary { background: var(--accent); color: #1a1205; border: none; font-weight: 600; padding: 9px; }
+  button:disabled { opacity: .5; cursor: default; }
+  .stage { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; }
+  canvas { max-width: 100%; max-height: 100%; box-shadow: 0 0 0 1px var(--line); }
+  .status { display: flex; align-items: center; gap: 12px; color: var(--muted); min-height: 20px; }
+  .bar { flex: 1; max-width: 320px; height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
+  .bar > div { height: 100%; width: 0; background: var(--accent); transition: width .1s; }
+  @media (max-width: 760px) {
+    body { flex-direction: column; height: auto; }
+    aside { width: 100%; border-right: none; border-bottom: 1px solid var(--line); }
+  }
+</style>
+</head>
+<body>
+<aside>
+  <h1>Tan Trajectories</h1>
+
+  <h2>Equations</h2>
+  <label for="system">System</label>
+  <select id="system"></select>
+  <pre class="formula" id="formula"></pre>
+  <label for="preset">Preset</label>
+  <select id="preset"></select>
+  <div id="params"></div>
+
+  <h2>View</h2>
+  <div id="view"></div>
+
+  <h2>Trajectories</h2>
+  <div id="traj"></div>
+  <label for="seed">Random seed</label>
+  <div class="row">
+    <input type="number" id="seed" value="7">
+    <button id="shuffle" style="flex:none;width:auto">Shuffle</button>
+  </div>
+  <label class="check"><input type="checkbox" id="both" checked> Trace backward in time as well</label>
+
+  <h2>Colour</h2>
+  <label for="palette">Palette</label>
+  <select id="palette"></select>
+  <div class="swatch" id="swatch"></div>
+  <label class="check"><input type="checkbox" id="reverse"> Reverse palette</label>
+  <label for="colorMode">Colour driven by</label>
+  <select id="colorMode">
+    <option value="abs">Curvature magnitude |κ|</option>
+    <option value="signed">Signed curvature κ (turn direction)</option>
+  </select>
+  <div id="look"></div>
+  <label for="bg">Background</label>
+  <div class="row"><input type="color" id="bg" value="#07080c"><span></span></div>
+
+  <h2>Output</h2>
+  <label for="res">Resolution</label>
+  <select id="res">
+    <option value="1920x1080">1920 × 1080 (Full HD)</option>
+    <option value="2560x1440" selected>2560 × 1440 (2K / QHD)</option>
+  </select>
+  <p></p>
+  <button class="primary" id="download">Render full resolution &amp; download PNG</button>
+</aside>
+
+<main>
+  <div class="status">
+    <span id="statusText">Rendering preview…</span>
+    <div class="bar"><div id="progress"></div></div>
+  </div>
+  <div class="stage"><canvas id="canvas"></canvas></div>
+</main>
+
+<script src="flow.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
