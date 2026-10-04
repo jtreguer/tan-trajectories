@@ -59,6 +59,8 @@ y' = −b·sin(x) + tan(a·sin(x−y))
 
 A rotational field disturbed by diagonal shear terms, producing chains of spirals.
 
+![Example render: large orange spirals separated by sharp crossing points](gallery/example_2.jpg)
+
 | Parameter | Range | Effect |
 |---|---|---|
 | **a** (tan gain) | 0.05 – 1.55 | Strength of the diagonal shear. Low values leave the regular rotation of the `b` term almost intact; high values break it into stretched, asymmetric spirals. |
