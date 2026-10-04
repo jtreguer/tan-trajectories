@@ -3,11 +3,14 @@
 Wallpaper generator that traces trajectories of two planar ODE families built on `tan()`,
 colouring each point of a curve by the local curvature of the trajectory.
 
+**Try it online: https://jtreguer.github.io/tan-trajectories/**
+
 ![Example render: glowing whirlpools on a dark field of wavy trajectories](gallery/example_1.jpg)
 
 ## Running it
 
-Open `index.html` directly in a browser. There is no build step, no dependency and no
+Use the [online version](https://jtreguer.github.io/tan-trajectories/), or clone the
+repository and open `index.html` directly in a browser. There is no build step, no dependency and no
 server. The page renders a live preview as you move the sliders, and the button at the
 bottom of the panel renders the image at full resolution and downloads it as a PNG.
 
