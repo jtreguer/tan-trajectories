@@ -118,3 +118,7 @@ To add a system or preset, edit `SYSTEMS` in `flow.js`; the UI picks it up autom
 A system needs a `label`, a `formula` string for display, a `params` object describing its
 sliders, a `field(p)` function returning `(x, y) => [x', y']`, and at least one preset
 that gives a value for every parameter plus `cx`, `cy` and `span`.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
